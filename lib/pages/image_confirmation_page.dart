@@ -64,7 +64,7 @@ class ImageConfirmationPage extends StatelessWidget {
                 showDialog(
                   context: context,
                   barrierDismissible: false,
-                  builder: (_) => const LoadingWidget(message: "食材を解析中..."),
+                  builder: (_) => const LoadingWidget(messages: ["RecipAIが食材を分析中...", "20秒ほどかかります...", "後もう少し...", "頑張ってます...", "もうすぐです..."]),
                 );
                 try {
                   await appProvider.analyzeImage();

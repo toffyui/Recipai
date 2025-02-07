@@ -53,7 +53,7 @@ class _IngredientListPageState extends State<IngredientListPage> {
       showDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => const LoadingWidget(message: "レシピを考案中..."),
+        builder: (_) => const LoadingWidget(messages: ["RecipAIが最高のレシピを考えています...", "20秒ほどかかります...", "もうお腹が空いていますか？", "頑張ってレシピを考えています...", "もうすぐです..."]),
       );
       try {
         await provider.generateRecipe(selected);
