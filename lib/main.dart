@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            textStyle: const TextStyle(fontSize: 24),
+            textStyle: const TextStyle(fontSize: 16),
           ),
         ),
         primaryColor: AppColors.primary,
