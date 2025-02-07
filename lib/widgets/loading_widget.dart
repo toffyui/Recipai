@@ -53,11 +53,14 @@ class _LoadingWidgetState extends State<LoadingWidget> {
               thirdRingColor: AppColors.accent,
               size: 160,
             ),
-            const SizedBox(height: 20),
-            Text(
-              widget.messages[_currentMessageIndex],
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 24, color: AppColors.textPrimary),
+            const SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                widget.messages[_currentMessageIndex],
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 20, color: AppColors.textPrimary),
+              ),
             ),
           ],
         ),

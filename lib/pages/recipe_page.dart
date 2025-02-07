@@ -42,31 +42,43 @@ class RecipePage extends StatelessWidget {
             children: [
               if (provider.recipeTitle != null &&
                   provider.recipeTitle!.isNotEmpty)
-                Text(
-                  provider.recipeTitle!,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
+                Center(
+                  child: Text(
+                    provider.recipeTitle!,
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               const SizedBox(height: 16),
               if (provider.recipeImageBase64 != null &&
                   provider.recipeImageBase64!.isNotEmpty)
                 Center(
-                  child: Image.memory(
-                    base64Decode(provider.recipeImageBase64!),
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    height: 200,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.memory(
+                      base64Decode(provider.recipeImageBase64!),
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: 200,
+                    ),
                   ),
                 ),
               const SizedBox(height: 16),
               if (provider.recipeText != null &&
-                  provider.recipeText!.isNotEmpty)
-                Text(
-                  provider.recipeText!,
-                  style: const TextStyle(fontSize: 18),
-                ),
+                  provider.recipeText!.isNotEmpty) 
+                ...provider.recipeText!.split('\n').map((line) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
+                    child: Text(
+                      line,
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                  );
+                }).toList()
+              else
+                const SizedBox(),
             ],
           ),
         ),
