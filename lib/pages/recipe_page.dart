@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
+import '../widgets/app_footer.dart';
 
 class RecipePage extends StatelessWidget {
   const RecipePage({Key? key}) : super(key: key);
@@ -70,6 +71,17 @@ class RecipePage extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          provider.toggleFavoriteCurrentRecipe();
+        },
+        backgroundColor: provider.isCurrentRecipeFavorite() ? Colors.red : Colors.grey,
+        child: Icon(
+          provider.isCurrentRecipeFavorite() ? Icons.favorite : Icons.favorite_border,
+          color: Colors.white,
+        ),
+      ),
+      bottomNavigationBar: const AppFooter(),
     );
   }
 }

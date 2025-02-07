@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../data/ingredient_data.dart';
+import '../models/recipe.dart';
 
 class AppProvider extends ChangeNotifier {
   XFile? uploadedImage;
@@ -16,6 +17,7 @@ class AppProvider extends ChangeNotifier {
   String? recipeTitle;
   String? recipeText;
   String? recipeImageBase64;
+  List<Recipe> favoriteRecipes = [];
   
   bool isLoading = false;
   String? errorMessage;
@@ -118,5 +120,53 @@ class AppProvider extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
     }
+  }
+  Recipe? get currentRecipe {
+    if (recipeTitle != null &&
+        recipeText != null &&
+        recipeImageBase64 != null &&
+        recipeTitle!.isNotEmpty &&
+        recipeText!.isNotEmpty &&
+        recipeImageBase64!.isNotEmpty) {
+      return Recipe(
+        title: recipeTitle!,
+        text: recipeText!,
+        imageBase64: recipeImageBase64!,
+      );
+    }
+    return null;
+  }
+  bool isCurrentRecipeFavorite() {
+    final current = currentRecipe;
+    if (current == null) return false;
+    return favoriteRecipes.contains(current);
+  }
+  void toggleFavoriteCurrentRecipe() {
+    final current = currentRecipe;
+    if (current == null) return;
+    if (favoriteRecipes.contains(current)) {
+      favoriteRecipes.remove(current);
+    } else {
+      favoriteRecipes.add(current);
+    }
+    notifyListeners();
+    _saveFavoriteRecipes();
+  }
+  Future<void> _loadFavoriteRecipes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String>? favoriteList = prefs.getStringList("favoriteRecipes");
+    if (favoriteList != null) {
+      favoriteRecipes = favoriteList.map((jsonString) {
+        final Map<String, dynamic> data = jsonDecode(jsonString);
+        return Recipe.fromJson(data);
+      }).toList();
+      notifyListeners();
+    }
+  }
+  Future<void> _saveFavoriteRecipes() async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> jsonList =
+        favoriteRecipes.map((recipe) => jsonEncode(recipe.toJson())).toList();
+    await prefs.setStringList("favoriteRecipes", jsonList);
   }
 }

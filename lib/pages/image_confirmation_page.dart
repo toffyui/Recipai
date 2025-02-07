@@ -5,6 +5,7 @@ import '../providers/app_provider.dart';
 import 'ingredient_list_page.dart';
 import '../core/constants/colors.dart';
 import '../widgets/loading_widget.dart';
+import '../widgets/app_footer.dart';
 
 class ImageConfirmationPage extends StatelessWidget {
   const ImageConfirmationPage({Key? key}) : super(key: key);
@@ -85,6 +86,7 @@ class ImageConfirmationPage extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: const AppFooter(),
     );
   }
 }

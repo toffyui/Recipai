@@ -4,6 +4,7 @@ import '../data/ingredient_data.dart';
 import '../providers/app_provider.dart';
 import 'recipe_page.dart';
 import '../widgets/loading_widget.dart';
+import '../widgets/app_footer.dart';
 
 class IngredientListPage extends StatefulWidget {
   const IngredientListPage({Key? key}) : super(key: key);
@@ -158,6 +159,7 @@ class _IngredientListPageState extends State<IngredientListPage> {
         label: const Text("レシピを作成する"),
         icon: const Icon(Icons.restaurant_menu),
       ),
+      bottomNavigationBar: const AppFooter(currentIndex: 1),
     );
   }
 }
