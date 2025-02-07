@@ -68,6 +68,19 @@ class _IngredientListPageState extends State<IngredientListPage> {
       );
     }
   }
+
+  String getIngredientImage(String name) {
+    List<MapEntry<String, String>> matchedEntries = ingredientImages.entries
+        .where((entry) => name.contains(entry.key)) // 部分一致
+        .toList();
+
+    if (matchedEntries.isEmpty) {
+      return fallbackIngredientImage; // 一致なしの場合はデフォルト画像
+    }
+    matchedEntries.sort((a, b) => b.key.length.compareTo(a.key.length));
+
+    return matchedEntries.first.value;
+  }
   
   @override
   Widget build(BuildContext context) {
@@ -86,7 +99,7 @@ class _IngredientListPageState extends State<IngredientListPage> {
                 itemCount: provider.ingredientNames.length,
                 itemBuilder: (context, index) {
                   final name = provider.ingredientNames[index];
-                  final imageUrl = ingredientImages[name] ?? fallbackIngredientImage;
+                  final imageUrl = getIngredientImage(name);
                   
                   return Card(
                     shape: RoundedRectangleBorder(
