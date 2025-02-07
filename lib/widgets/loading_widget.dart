@@ -1,23 +1,63 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../core/constants/colors.dart';
 
-class LoadingWidget extends StatelessWidget {
-  final String message;
+class LoadingWidget extends StatefulWidget {
+  final List<String> messages;
 
-  const LoadingWidget({Key? key, this.message = "ただいまRecipAIが思考中です..."}) : super(key: key);
+  const LoadingWidget({Key? key, required this.messages}) : super(key: key);
+
+  @override
+  _LoadingWidgetState createState() => _LoadingWidgetState();
+}
+
+class _LoadingWidgetState extends State<LoadingWidget> {
+  int _currentMessageIndex = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // 3秒ごとにメッセージを変更
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (mounted) {
+        setState(() {
+          _currentMessageIndex = (_currentMessageIndex + 1) % widget.messages.length;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async => false,
-      child: Center(
+    return PopScope(
+      canPop: false,
+      child: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: AppColors.background,
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircularProgressIndicator(),
-            const SizedBox(height: 16),
+            LoadingAnimationWidget.discreteCircle(
+              color: Colors.white,
+              secondRingColor: AppColors.primary,
+              thirdRingColor: AppColors.accent,
+              size: 160,
+            ),
+            const SizedBox(height: 20),
             Text(
-              message,
-              style: const TextStyle(fontSize: 16),
+              widget.messages[_currentMessageIndex],
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 24, color: AppColors.textPrimary),
             ),
           ],
         ),
