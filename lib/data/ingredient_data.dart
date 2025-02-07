@@ -6,6 +6,27 @@ const Map<String, String> ingredientImages = {
   "鶏肉": "assets/ingredients/chicken.png",
   "ブロッコリー": "assets/ingredients/broccoli.png",
   "にんじん": "assets/ingredients/carrot.png",
+  "ナス": "assets/ingredients/eggplant.png",
+  "ピーマン": "assets/ingredients/green_pepper.png",
+  "緑ピーマン": "assets/ingredients/green_pepper.png",
+  "赤ピーマン": "assets/ingredients/red_pepper.png",
+  "黄ピーマン": "assets/ingredients/yellow_pepper.png",
+  "玉ねぎ": "assets/ingredients/onion.png",
+  "じゃがいも": "assets/ingredients/potato.png",
+  "じゃが芋": "assets/ingredients/potato.png",
+  "さつまいも": "assets/ingredients/sweet_potato.png",
+  "かぼちゃ": "assets/ingredients/pumpkin.png",
+  "キャベツ": "assets/ingredients/cabbage.png",
+  "ほうれん草": "assets/ingredients/spinach.png",
+  "レンコン": "assets/ingredients/lotus_root.png",
+  "れんこん": "assets/ingredients/lotus_root.png",
+  "大根": "assets/ingredients/daikon.png",
+  "にら": "assets/ingredients/chive.png",
+  "ねぎ": "assets/ingredients/green_onion.png",
+  "しいたけ": "assets/ingredients/shiitake.png",
+  "しめじ": "assets/ingredients/shimeji.png",
+  "マッシュルーム": "assets/ingredients/mushroom.png",
+  "豚肉": "assets/ingredients/pork.png",
 };
 
-const String fallbackIngredientImage = "assets/ingredients/fallback.png";
+const String fallbackIngredientImage = "assets/logo.png";
