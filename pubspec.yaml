@@ -62,17 +62,8 @@ flutter:
   uses-material-design: true
   assets:
     - .env
-    - assets/splash.png
-    - assets/top_image.png
-    - assets/recipai.gif
-    - assets/ingredients/tomato.png
-    - assets/ingredients/cheese.png
-    - assets/ingredients/lettuce.png
-    - assets/ingredients/ham.png
-    - assets/ingredients/chicken.png
-    - assets/ingredients/broccoli.png
-    - assets/ingredients/carrot.png
-    - assets/ingredients/fallback.png
+    - assets/
+    - assets/ingredients/
 
 flutter_native_splash:
   color: "#F7EDE2"
