@@ -38,7 +38,7 @@ class _LoadingWidgetState extends State<LoadingWidget> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onWillPop: () async => false,
+      canPop: false,
       child: Container(
         width: double.infinity,
         height: double.infinity,
@@ -51,13 +51,13 @@ class _LoadingWidgetState extends State<LoadingWidget> {
               color: Colors.white,
               secondRingColor: AppColors.primary,
               thirdRingColor: AppColors.accent,
-              size: 200,
+              size: 160,
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 20),
             Text(
               widget.messages[_currentMessageIndex],
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 24, color: Colors.white),
+              style: const TextStyle(fontSize: 24, color: AppColors.textPrimary),
             ),
           ],
         ),
