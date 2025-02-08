@@ -41,17 +41,17 @@ class _IngredientListPageState extends State<IngredientListPage> {
               ListTile(
                 leading: const Icon(Icons.star),
                 title: const Text("あっさり"),
-                onTap: () => Navigator.pop(context, "あっさり"),
+                onTap: () => Navigator.pop(context, "light"),
               ),
               ListTile(
                 leading: const Icon(Icons.star),
                 title: const Text("がっつり"),
-                onTap: () => Navigator.pop(context, "がっつり"),
+                onTap: () => Navigator.pop(context, "hearty"),
               ),
               ListTile(
                 leading: const Icon(Icons.star),
                 title: const Text("おまかせ"),
-                onTap: () => Navigator.pop(context, "おまかせ"),
+                onTap: () => Navigator.pop(context, "chef's choice"),
               ),
             ],
           ),

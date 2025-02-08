@@ -23,6 +23,10 @@ class AppProvider extends ChangeNotifier {
   bool isLoading = false;
   String? errorMessage;
   
+  AppProvider() {
+    _loadFavoriteRecipes();
+  }
+  
   Future<void> analyzeImage() async {
     if (uploadedImage == null) return;
     
@@ -35,11 +39,12 @@ class AppProvider extends ChangeNotifier {
       final bytes = await file.readAsBytes();
       final base64Image = base64Encode(bytes);
       
+      final mimeType = uploadedImage!.mimeType ?? 'image/jpeg';
       final url = Uri.parse(dotenv.env["DETECT_INGREDIENTS_URL"]!);
       final response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
-        body: jsonEncode({"image": base64Image}),
+        body: jsonEncode({"image": base64Image, "mime_type": mimeType}),
       );
       
       if (response.statusCode == 200) {
