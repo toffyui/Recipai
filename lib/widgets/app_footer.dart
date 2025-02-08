@@ -12,7 +12,10 @@ class AppFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      selectedItemColor: AppColors.accent,
+      type: BottomNavigationBarType.fixed,
+      unselectedItemColor: AppColors.textPrimary,
+      selectedItemColor: AppColors.textPrimary,
+      selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       currentIndex: currentIndex ?? 0,
       onTap: (int index) async {
         if (currentIndex != null && index == currentIndex) return;
@@ -46,14 +49,25 @@ class AppFooter extends StatelessWidget {
             break;
         }
       },
-      items: const [
+      items: [
         BottomNavigationBarItem(
           icon: Icon(Icons.menu_book),
           label: "お気に入り一覧",
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.photo_camera),
-          label: "冷蔵庫をパシャッ",
+          icon: Container(
+            decoration: BoxDecoration(
+              color: AppColors.primary,
+              shape: BoxShape.circle,
+            ),
+            padding: const EdgeInsets.all(8),
+            child: const Icon(
+              Icons.photo_camera,
+              color: Colors.white,
+              size: 36,
+            ),
+          ),
+          label: "",
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.kitchen),

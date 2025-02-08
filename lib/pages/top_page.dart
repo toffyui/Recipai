@@ -4,6 +4,7 @@ import '../providers/app_provider.dart';
 import 'image_confirmation_page.dart';
 import '../core/constants/colors.dart';
 import '../utils/image_picker_util.dart';
+import 'favorite_recipes_page.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -11,6 +12,16 @@ class TopPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appProvider = Provider.of<AppProvider>(context, listen: false);
+    // もしお気に入りリストに既に要素がある場合、ビルド完了後にお気に入りページへ遷移する
+    if (appProvider.favoriteRecipes.isNotEmpty) {
+      // addPostFrameCallback を使うことで、build 後に一度だけ実行されるようにする
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => const FavoriteRecipesPage()),
+        );
+      });
+    }
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Container(
