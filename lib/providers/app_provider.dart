@@ -9,6 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../data/ingredient_data.dart';
 import '../models/recipe.dart';
+import '../widgets/image_source_selector.dart';
 
 class AppProvider extends ChangeNotifier {
   XFile? uploadedImage;
@@ -21,16 +22,6 @@ class AppProvider extends ChangeNotifier {
   
   bool isLoading = false;
   String? errorMessage;
-  
-  final ImagePicker _picker = ImagePicker();
-  
-  Future<void> pickImage() async {
-    final pickedImage = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      uploadedImage = pickedImage;
-      notifyListeners();
-    }
-  }
   
   Future<void> analyzeImage() async {
     if (uploadedImage == null) return;

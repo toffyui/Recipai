@@ -47,5 +47,9 @@
 		<true/>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>このアプリは、冷蔵庫の写真を撮るためにカメラを使用します。</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>このアプリは、ギャラリーから画像を選択するためにフォトライブラリへのアクセスを必要とします。</string>
 	</dict>
 </plist>

@@ -60,18 +60,20 @@ class _IngredientListPageState extends State<IngredientListPage> {
     );
 
     if (selected != null) {
-      showDialog(
+      showGeneralDialog(
         context: context,
         barrierDismissible: false,
-        builder: (_) => const LoadingWidget(
-          messages: [
-            "RecipAIが最高のレシピを考えています...",
-            "20秒ほどかかります...",
-            "もうお腹が空いていますか？",
-            "頑張ってレシピを考えています...",
-            "もうすぐです..."
-          ],
-        ),
+        pageBuilder: (context, animation, secondaryAnimation) {
+          return const LoadingWidget(
+            messages: [
+              "RecipAIが最高のレシピを考えています...",
+              "20秒ほどかかります...",
+              "もうお腹が空いていますか？",
+              "頑張ってレシピを考えています...",
+              "もうすぐです..."
+            ],
+          );
+        },
       );
       try {
         await provider.generateRecipe(selected);
@@ -226,7 +228,7 @@ class _IngredientListPageState extends State<IngredientListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("食材一覧"),
+        title: const Text("冷蔵庫の中身一覧"),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -357,7 +359,7 @@ class _IngredientListPageState extends State<IngredientListPage> {
           ],
         ),
       ),
-      bottomNavigationBar: const AppFooter(currentIndex: 1),
+      bottomNavigationBar: const AppFooter(currentIndex: 2),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/app_provider.dart';
 import 'image_confirmation_page.dart';
 import '../core/constants/colors.dart';
+import '../utils/image_picker_util.dart';
 
 class TopPage extends StatelessWidget {
   const TopPage({Key? key}) : super(key: key);
@@ -58,8 +59,8 @@ class TopPage extends StatelessWidget {
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () async {
-                        await appProvider.pickImage();
-                        if (appProvider.uploadedImage != null) {
+                        final res = await pickAndSaveImage(context);
+                        if (res != null) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
