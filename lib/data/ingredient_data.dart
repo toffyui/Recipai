@@ -96,6 +96,14 @@ const Map<String, String> ingredientImages = {
   "ヨーグルト": "assets/ingredients/yogurt.png",
   "豆板醤": "assets/ingredients/doubanjiang.png",
   "コチュジャン": "assets/ingredients/doubanjiang.png",
+  "白菜": "assets/ingredients/hakusai.png",
+  "青梗菜": "assets/ingredients/chinese_cabbage.png",
+  "チンゲンサイ": "assets/ingredients/chinese_cabbage.png",
+  "チンゲン菜": "assets/ingredients/chinese_cabbage.png",
+  "モヤシ": "assets/ingredients/bean_sprouts.png",
+  "もやし": "assets/ingredients/bean_sprouts.png",
+  "ソーセージ": "assets/ingredients/sausage.png",
+  "コーンスターチ": "assets/ingredients/corn_starch.png",
 };
 
 const String fallbackIngredientImage = "assets/logo.png";
