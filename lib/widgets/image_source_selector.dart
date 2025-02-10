@@ -8,34 +8,57 @@ Future<XFile?> showImageSourceSelector(BuildContext context) async {
   );
 }
 
-class _ImageSourceSelectorDialog extends StatelessWidget {
+class _ImageSourceSelectorDialog extends StatefulWidget {
   const _ImageSourceSelectorDialog({Key? key}) : super(key: key);
 
   @override
+  State<_ImageSourceSelectorDialog> createState() =>
+      _ImageSourceSelectorDialogState();
+}
+
+class _ImageSourceSelectorDialogState extends State<_ImageSourceSelectorDialog> {
+  bool _isProcessing = false;
+  final ImagePicker picker = ImagePicker();
+
+  Future<void> _handlePick(ImageSource source) async {
+    if (_isProcessing) return;
+    setState(() {
+      _isProcessing = true;
+    });
+    final XFile? image = await picker.pickImage(source: source);
+    Navigator.pop(context, image);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final ImagePicker picker = ImagePicker();
     return AlertDialog(
       title: const Text("冷蔵庫の写真を撮ろう"),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
+      content: Stack(
         children: [
-          ListTile(
-            leading: const Icon(Icons.photo_library),
-            title: const Text("ライブラリから選ぶ"),
-            onTap: () async {
-              final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-              Navigator.pop(context, image);
-            },
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.photo_library),
+                title: const Text("ライブラリから選ぶ"),
+                onTap: () => _handlePick(ImageSource.gallery),
+              ),
+              const Divider(),
+              ListTile(
+                leading: const Icon(Icons.camera_alt),
+                title: const Text("写真を撮る"),
+                onTap: () => _handlePick(ImageSource.camera),
+              ),
+            ],
           ),
-          const Divider(),
-          ListTile(
-            leading: const Icon(Icons.camera_alt),
-            title: const Text("写真を撮る"),
-            onTap: () async {
-              final XFile? image = await picker.pickImage(source: ImageSource.camera);
-              Navigator.pop(context, image);
-            },
-          ),
+          if (_isProcessing)
+            Positioned.fill(
+              child: Container(
+                child: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+              ),
+            ),
         ],
       ),
     );
